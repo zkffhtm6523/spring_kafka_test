@@ -1,5 +1,6 @@
 package com.kafka.spring_kafka_test;
 
+import com.kafka.spring_kafka_test.producer.ClipProducer;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.admin.TopicDescription;
@@ -23,9 +24,12 @@ public class SpringKafkaTestApplication {
 
     // chapter3
     @Bean
-    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate){
+//    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate){ // 기존에 있던 것
+    public ApplicationRunner runner(ClipProducer clipProducer){ // 직접 만든 것[비동기]
         return args -> {
-            kafkaTemplate.send("clip3", "Hello, Clip3");
+            clipProducer.async("clip3", "Hello, clip3-async");
+            clipProducer.sync("clip3", "Hello, Clip3-sync");
+            Thread.sleep(1000L);
         };
     }
 
