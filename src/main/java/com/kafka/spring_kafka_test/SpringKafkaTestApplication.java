@@ -21,27 +21,37 @@ public class SpringKafkaTestApplication {
         SpringApplication.run(SpringKafkaTestApplication.class, args);
     }
 
+    // chapter3
+    @Bean
+    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate){
+        return args -> {
+            kafkaTemplate.send("clip3", "Hello, Clip3");
+        };
+    }
+
 //    @Bean
 //    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate) {
 //        return args -> {
 //            kafkaTemplate.send("quickstart-events", "hello-world");
 //        };
 //    }
-    @Bean
-    public ApplicationRunner runner(AdminClient adminClient){
-        return args -> {
-            Map<String, TopicListing> topics = adminClient.listTopics().namesToListings().get();
-            for (String topicName : topics.keySet()){
-                TopicListing topicListing = topics.get(topicName);
-                System.out.println(topicListing); // 토픽 이름 출력
+    // chapter2
+//    @Bean
+//    public ApplicationRunner runner(AdminClient adminClient){
+//        return args -> {
+//            Map<String, TopicListing> topics = adminClient.listTopics().namesToListings().get();
+//            for (String topicName : topics.keySet()){
+//                TopicListing topicListing = topics.get(topicName);
+//                System.out.println(topicListing); // 토픽 이름 출력
+//
+//                Map<String, TopicDescription> description = adminClient.describeTopics(Collections.singleton(topicName)).all().get();
+//                System.out.println(description); // 토픽 정보 출력
+//
+//                if(!topicListing.isInternal()){
+//                    adminClient.deleteTopics(Collections.singleton(topicName));
+//                }
+//            }
+//        };
+//    }
 
-                Map<String, TopicDescription> description = adminClient.describeTopics(Collections.singleton(topicName)).all().get();
-                System.out.println(description); // 토픽 정보 출력
-
-                if(!topicListing.isInternal()){
-                    adminClient.deleteTopics(Collections.singleton(topicName));
-                }
-            }
-        };
-    }
 }
