@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
@@ -29,7 +30,9 @@ public class SpringKafkaTestApplication {
         return args -> {
             clipProducer.async("clip3", "Hello, clip3-async");
             clipProducer.sync("clip3", "Hello, Clip3-sync");
-            Thread.sleep(1000L);
+//            Thread.sleep(1000L);
+            clipProducer.routingSend("clip3", "Hello, Clip3-routing");
+            clipProducer.routingSendByts("clip3-bytes", "Hello, Clip3-bytes".getBytes(StandardCharsets.UTF_8));
         };
     }
 

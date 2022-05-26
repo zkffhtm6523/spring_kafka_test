@@ -12,11 +12,12 @@ import org.springframework.kafka.core.KafkaAdmin;
 public class KafkaTopicConfiguration {
 
 
-    // chapter3
+    // chapter3, 토픽 빌드 및 신규토픽 생성
     @Bean
     public KafkaAdmin.NewTopics clip3s(){
         return new KafkaAdmin.NewTopics(
-                TopicBuilder.name("clip3").build()
+                TopicBuilder.name("clip3").build(),
+                TopicBuilder.name("clip3-bytes").build()
         );
     }
 
