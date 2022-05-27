@@ -1,20 +1,12 @@
 package com.kafka.spring_kafka_test;
 
 import com.kafka.spring_kafka_test.producer.ClipProducer;
-import org.apache.kafka.clients.admin.AdminClient;
-import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.clients.admin.TopicDescription;
-import org.apache.kafka.clients.admin.TopicListing;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.config.TopicBuilder;
-import org.springframework.kafka.core.KafkaTemplate;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Map;
 
 @SpringBootApplication
 public class SpringKafkaTestApplication {
@@ -32,7 +24,8 @@ public class SpringKafkaTestApplication {
             clipProducer.sync("clip3", "Hello, Clip3-sync");
 //            Thread.sleep(1000L);
             clipProducer.routingSend("clip3", "Hello, Clip3-routing");
-            clipProducer.routingSendByts("clip3-bytes", "Hello, Clip3-bytes".getBytes(StandardCharsets.UTF_8));
+            clipProducer.routingSendBytes("clip3-bytes", "Hello, Clip3-bytes".getBytes(StandardCharsets.UTF_8));
+            clipProducer.replyingSend("clip3-request", "Ping Clip3");
         };
     }
 
