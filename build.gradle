@@ -13,10 +13,15 @@ repositories {
 }
 
 dependencies {
+    // 기본 추가
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.kafka:spring-kafka'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+    // consumer 내용 시 추가
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3' // JSON 사용 가능
 }
 
 tasks.named('test') {
