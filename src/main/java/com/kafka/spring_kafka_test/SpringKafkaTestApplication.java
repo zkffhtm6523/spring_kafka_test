@@ -22,29 +22,32 @@ public class SpringKafkaTestApplication {
     public ApplicationRunner runner(ClipProducer clipProducer,
                                     KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer){
         return args -> {
-            clipProducer.async("clip4", "Hello, Clip4 Container");
-            kafkaMessageListenerContainer.start(); // kafkaMessageListenerContainer에서 setAutoStartup을 false로 해줘서 수동으로 start함
-
-            Thread.sleep(1_000L);
-
-            System.out.println("-- pause --");
-            kafkaMessageListenerContainer.pause();
-            Thread.sleep(1_000L);
-
-            clipProducer.async("clip4", "Hello, Secondly Clip4 Container");
-
-            System.out.println("-- resume --");
-            kafkaMessageListenerContainer.resume();
-            Thread.sleep(1_000L);
-
-            System.out.println("-- stop --");
-            kafkaMessageListenerContainer.stop();
-
-            // clipConsumer 생성 직후
-            clipProducer.async("clip4-listener", "Hello, Clip4 Listener");
+//            clipProducer.async("clip4", "Hello, Clip4 Container");
+//            kafkaMessageListenerContainer.start(); // kafkaMessageListenerContainer에서 setAutoStartup을 false로 해줘서 수동으로 start함
+//
+//            Thread.sleep(1_000L);
+//
+//            System.out.println("-- pause --");
+//            kafkaMessageListenerContainer.pause();
+//            Thread.sleep(1_000L);
+//
+//            clipProducer.async("clip4", "Hello, Secondly Clip4 Container");
+//
+//            System.out.println("-- resume --");
+//            kafkaMessageListenerContainer.resume();
+//            Thread.sleep(1_000L);
+//
+//            System.out.println("-- stop --");
+//            kafkaMessageListenerContainer.stop();
+//
+//            // clipConsumer 생성 직후
+//            clipProducer.async("clip4-listener", "Hello, Clip4 Listener");
 
             // Animal 객체 생성 이후 Json으로
-            clipProducer.asyncAnimal("clip4-animal", new Animal("puppy", 15));
+//            clipProducer.asyncAnimal("clip4-animal", new Animal("puppy", 15));
+
+            // error handler
+            clipProducer.asyncAnimal("clip3-animal", new Animal("puppy", 15));
         };
     }
     // chapter3
